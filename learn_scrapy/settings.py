@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'learn_scrapy.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'learn_scrapy (+http://www.yourdomain.com)'
+USER_AGENT = "Study Purpose/No commercial use. Concerns at muzzammilz@gmail.com"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
