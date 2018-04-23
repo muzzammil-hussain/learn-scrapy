@@ -8,4 +8,4 @@ class BBCNewsSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        pass
+        print(response.css("title::text").extract_first())
