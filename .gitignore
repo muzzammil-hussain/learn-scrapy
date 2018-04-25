@@ -1,4 +1,5 @@
 *_venv
 .idea
 .vscode
+.scrapy
 __pycache__
