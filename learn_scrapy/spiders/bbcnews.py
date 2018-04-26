@@ -17,4 +17,5 @@ class BBCNewsSpider(scrapy.Spider):
             yield scrapy.Request("{}{}".format(self.root, link), callback=self.parse_category)
 
     def parse_category(self, response):
-        print(response.xpath('//title/text()').extract_first())
+        # category title
+        print(response.xpath("//title/text()").extract_first())
