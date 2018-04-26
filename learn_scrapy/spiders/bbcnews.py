@@ -19,3 +19,6 @@ class BBCNewsSpider(scrapy.Spider):
     def parse_category(self, response):
         # category title
         print(response.xpath("//title/text()").extract_first())
+
+        # extract the page headline -- few pages will not have headlines
+        print(response.xpath("//div[contains(@class, 'buzzard-item') or contains(@class, 'albatross-item') or contains(@class, 'kestrel-item')]/a/@href").extract_first())
