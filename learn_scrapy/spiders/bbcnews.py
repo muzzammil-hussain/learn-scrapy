@@ -3,7 +3,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
 
-class BBCNewsSpider(scrapy.Spider):
+class BBCNewsSpider(CrawlSpider):
     name = "bbcnews"
     root = "http://www.bbc.com"
     allowed_domains = ["www.bbc.com"]
@@ -11,10 +11,10 @@ class BBCNewsSpider(scrapy.Spider):
         "http://www.bbc.com/news",
     ]
 
-    def parse(self, response):
-        nav_links = response.xpath("//div[contains(@class, 'nw-o-news-wide-navigation')]//a//@href").extract()
-        for link in nav_links:
-            yield scrapy.Request("{}{}".format(self.root, link), callback=self.parse_category)
+    rules = (
+        Rule(LinkExtractor(allow=(), restrict_xpaths=("//div[contains(@class, 'nw-o-news-wide-navigation')]",)),
+             callback="parse_category", follow=True),
+    )
 
     def parse_category(self, response):
         # category title
