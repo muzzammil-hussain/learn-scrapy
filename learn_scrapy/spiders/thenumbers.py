@@ -18,4 +18,4 @@ class BBCNewsSpider(CrawlSpider):
     )
 
     def parse(self, response):
-        pass
+        print(response)
