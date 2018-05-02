@@ -9,6 +9,7 @@ from random import choice
 from scrapy import signals
 from scrapy.exceptions import NotConfigured
 
+# https://gist.github.com/seagatesoft/e7de4e3878035726731d
 class RotateUserAgentMiddleware(object):
     """Rotate user-agent for each request."""
     def __init__(self, user_agents):
