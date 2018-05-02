@@ -7,7 +7,7 @@ class BBCNewsSpider(CrawlSpider):
     name = "thenumbers"
     root = "https://www.the-nuumbers.com"
     allowed_domains = ["www.the-numbers.com"]
-    rotate_user_agent = True
+    #rotate_user_agent = True
     start_urls = [
         "https://www.the-numbers.com",
     ]
