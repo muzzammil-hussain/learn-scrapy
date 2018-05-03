@@ -19,4 +19,5 @@ class TheNumbersSpider(CrawlSpider):
 
     def parse(self, response):
         movies = response.xpath(".//div[@id='page_filling_chart']//table//tr")
-        for movie in movies
+        for movie in movies:
+            print(movie.xpath(".//td[3]//text()").extract_first())
