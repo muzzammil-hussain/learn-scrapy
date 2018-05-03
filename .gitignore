@@ -1,4 +1,4 @@
-*_venv
+venv*
 .idea
 .vscode
 .scrapy
