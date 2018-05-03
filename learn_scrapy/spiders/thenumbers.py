@@ -3,7 +3,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
 
-class BBCNewsSpider(CrawlSpider):
+class TheNumbersSpider(CrawlSpider):
     name = "thenumbers"
     root = "https://www.the-nuumbers.com"
     allowed_domains = ["www.the-numbers.com"]
@@ -18,4 +18,5 @@ class BBCNewsSpider(CrawlSpider):
     # )
 
     def parse(self, response):
-        print(response.xpath(".//div[@id='page_filling_chart']").extract_first())
+        movies = response.xpath(".//div[@id='page_filling_chart']//table//tr")
+        for movie in movies
