@@ -1,2 +1,2 @@
-# learn-scrapy
-My refresher on scraping. 
+# scrapy-crawlers
+All my scrapy crawlers for research and learning.
