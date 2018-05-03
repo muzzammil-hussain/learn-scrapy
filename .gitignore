@@ -3,3 +3,4 @@ venv*
 .vscode
 .scrapy
 __pycache__
+local_settings.py
