@@ -18,4 +18,4 @@ class BBCNewsSpider(CrawlSpider):
     # )
 
     def parse(self, response):
-        print(response.xpath(".//title/text()").extract_first())
+        print(response.xpath(".//div[@id='page_filling_chart']").extract_first())
