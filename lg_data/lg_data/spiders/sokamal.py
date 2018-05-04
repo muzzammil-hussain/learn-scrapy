@@ -18,4 +18,6 @@ class SoKamalSpider(CrawlSpider):
     ]
 
     def parse(self, response):
+        print("*****************************")
+        print(response.request.headers)
         print(response.xpath(".//title/text()").extract_first())
