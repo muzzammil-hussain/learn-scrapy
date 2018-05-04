@@ -5,16 +5,19 @@ from scrapy.linkextractors import LinkExtractor
 
 class SoKamalSpider(CrawlSpider):
     name = "sokamal"
-    allowed_domains = ["https://sokamal.com"]
+    allowed_domains = ["sokamal.com"]
     #rotate_user_agent = True
     start_urls = [
-        "https://sokamal.com",
+        "https://sokamal.com/collections/grand-sale-stitched",
+        "https://sokamal.com/collections/grand-sale-unstitched",
+        "https://sokamal.com/collections/pret-summer18",
+        "https://sokamal.com/collections/unstitched-summer18",
+        "https://sokamal.com/collections/silk-range-18",
+        "https://sokamal.com/collections/pret-bottoms",
+        "https://sokamal.com/collections/unstitched-bottoms",
+        "https://sokamal.com/collections/dupatta",
+        "https://sokamal.com/collections/scarves",
     ]
 
-    rules = (
-        Rule(LinkExtractor(allow=(), restrict_xpaths=("",)),
-             callback="parse_list", follow=True),
-    )
-
     def parse(self, response):
-        pass
+        print(response.xpath(".//title/text()").extract_first())
