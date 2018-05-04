@@ -4,7 +4,7 @@ from scrapy.spiders import CrawlSpider, Rule
 class SoKamalSpider(CrawlSpider):
     name = "sokamal"
     allowed_domains = ["sokamal.com"]
-    #rotate_user_agent = True
+    rotate_user_agent = True
     start_urls = [
         "https://sokamal.com/collections/grand-sale-stitched",
         "https://sokamal.com/collections/grand-sale-unstitched",
