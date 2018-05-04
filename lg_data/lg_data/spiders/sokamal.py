@@ -1,9 +1,11 @@
-import scrapy
+from scrapy import FormRequest, Request
 from scrapy.spiders import CrawlSpider, Rule
 
 class SoKamalSpider(CrawlSpider):
     name = "sokamal"
-    allowed_domains = ["sokamal.com"]
+    endpoint = "https://fishry-api-live.azurewebsites.net/collection_request"
+    store_id = "480EFD74-078D-4CF2-AC68-270940ED408F"
+    #allowed_domains = ["sokamal.com"]
     rotate_user_agent = True
     collections = [
         "643E9641-4E2D-49F8-A39D-B714CE336169",
@@ -16,19 +18,22 @@ class SoKamalSpider(CrawlSpider):
         "0B068C4A-811E-46D6-B4AA-1B84D92A818C",
         "F06CE5AA-F8EA-4C54-863A-A15D8E244DAD"
     ]
-    start_urls = [
-        "https://sokamal.com/collections/grand-sale-stitched",
-        "https://sokamal.com/collections/grand-sale-unstitched",
-        "https://sokamal.com/collections/pret-summer18",
-        "https://sokamal.com/collections/unstitched-summer18",
-        "https://sokamal.com/collections/silk-range-18",
-        "https://sokamal.com/collections/pret-bottoms",
-        "https://sokamal.com/collections/unstitched-bottoms",
-        "https://sokamal.com/collections/dupatta",
-        "https://sokamal.com/collections/scarves",
-    ]
+
+    def start_requests(self):
+        for item in self.collections:
+            yield FormRequest(
+                self.endpoint,
+                formdata={
+                    "storeID": self.store_id,
+                    "take": "999",
+                    "skip": "0",
+                    "collection_inclusion": "true",
+                    "order_by": "__createdat",
+                    "order_by_seq": "desc",
+                    "varients_inclusion": "true",
+                    "status": "true",
+                    "collection_id[]": item
+                })
 
     def parse(self, response):
-        print("*****************************")
-        print(response.request.headers)
-        print(response.xpath(".//title/text()").extract_first())
+        print(response)
