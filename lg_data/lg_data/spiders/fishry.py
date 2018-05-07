@@ -3,7 +3,7 @@ from scrapy import FormRequest, Request
 from scrapy.spiders import CrawlSpider
 
 
-class SoKamalSpider(CrawlSpider):
+class FishrySpider(CrawlSpider):
     name = "sokamal"
     api_endpoint = "https://fishry-api-live.azurewebsites.net/collection_request"
     collections_endpoint = "https://fishry.azure-mobile.net/tables/collection?$filter=((collectionVisibility eq true) and (storeID eq '{}'))&$top=1000"
