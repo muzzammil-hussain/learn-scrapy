@@ -5,10 +5,19 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy import Field, Item
 
 
-class LgDataItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class Products(Item):
+    id = Field()
+    created_at = Field()
+    updated_at = Field()
+    name = Field()
+    images = Field()
+    sku = Field()
+    url = Field()
+    variants = Field()
+    price = Field()
+    quantity = Field()
+    description = Field()
+    meta = Field()
