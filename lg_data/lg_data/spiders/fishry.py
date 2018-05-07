@@ -1,5 +1,5 @@
 import json
-from lg_data.lg_data.items import Product
+from lg_data.items import Product
 from scrapy import FormRequest, Request
 from scrapy.spiders import CrawlSpider
 
@@ -59,7 +59,29 @@ class FishrySpider(CrawlSpider):
         json_response = json.loads(response.body_as_unicode())
         for item in json_response:
             product = Product()
-            print(item["id"])
+
+            images = []
+            raw_images = json.loads(item["productImage"])
+            for image in raw_images:
+                images.append({
+                    "name": image["Image"],
+                    "featured": image["Featured"]
+                })
+
+
+
+            product["id"] = item["id"]
+            product["created_at"] = item["__createdAt"]
+            product["updated_at"] = item["__updatedAt"]
+            product["name"] = item["productName"]
+            product["images"] = images
+            product["sku"] = item["productSKU"]
+            product["url"] = item["productUrl"]
+            product["variants"] = ""
+            product["price"] = item["productPrice"]
+            product["quantity"] = item["inventoryQuantity"]
+            product["description"] = item["productDescription"]
+            product["meta"] = ""
 
             yield product
 
