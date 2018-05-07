@@ -8,7 +8,7 @@
 from scrapy import Field, Item
 
 
-class Products(Item):
+class Product(Item):
     id = Field()
     created_at = Field()
     updated_at = Field()

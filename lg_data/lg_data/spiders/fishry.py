@@ -1,4 +1,5 @@
 import json
+from lg_data.lg_data.items import Product
 from scrapy import FormRequest, Request
 from scrapy.spiders import CrawlSpider
 
@@ -57,7 +58,10 @@ class FishrySpider(CrawlSpider):
     def parse_category(self, response):
         json_response = json.loads(response.body_as_unicode())
         for item in json_response:
+            product = Product()
             print(item["id"])
+
+            yield product
 
     def parse_errors(self, response):
         pass
