@@ -50,10 +50,14 @@ class FishrySpider(CrawlSpider):
                         "collection_id[]": item["id"],
                         "varients": "[]"
                     },
-                    callback=self.parse_category
+                    callback=self.parse_category,
+                    errback=self.parse_errors
                 )
 
     def parse_category(self, response):
         json_response = json.loads(response.body_as_unicode())
         for item in json_response:
             print(item["id"])
+
+    def parse_errors(self, response):
+        pass
