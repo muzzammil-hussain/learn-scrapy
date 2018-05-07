@@ -9,7 +9,8 @@ class SoKamalSpider(CrawlSpider):
     collections_endpoint = "https://fishry.azure-mobile.net/tables/collection?$filter=((collectionVisibility eq true) and (storeID eq '{}'))&$top=1000"
     store_id = "480EFD74-078D-4CF2-AC68-270940ED408F"
     rotate_user_agent = True
-    fishry_stores = [
+
+    stores = [
         {
             "id": "480EFD74-078D-4CF2-AC68-270940ED408F",
             "zumo_id": "egepBriQNqIKWucZFzqpQOMwdDmzfs16",
@@ -18,8 +19,9 @@ class SoKamalSpider(CrawlSpider):
         }
     ]
 
+
     def start_requests(self):
-        for store in self.fishry_stores:
+        for store in self.stores:
             yield Request(
                 self.collections_endpoint.format(store["id"]),
                 headers = {
