@@ -28,6 +28,7 @@ class FishrySpider(CrawlSpider):
                     "X-ZUMO-APPLICATION": self.zumo_id
                 },
                 meta={
+                    "store_id": store["id"],
                     "ignore": store["ignore"]
                 }
             )
@@ -40,7 +41,7 @@ class FishrySpider(CrawlSpider):
                 yield FormRequest(
                     self.api_endpoint,
                     formdata={
-                        "storeID": self.store_id,
+                        "storeID": response.meta["store_id"],
                         "take": "999",
                         "skip": "0",
                         "collection_inclusion": "true",
@@ -72,7 +73,6 @@ class FishrySpider(CrawlSpider):
             raw_collections = json.loads(item["productCollections"])
             for v in raw_collections.values():
                 collections.append(v["name"])
-
 
             product["id"] = item["id"]
             product["created_at"] = item["__createdAt"]
