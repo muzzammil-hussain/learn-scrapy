@@ -8,7 +8,7 @@ class FishrySpider(CrawlSpider):
     name = "fishry"
     api_endpoint = "https://fishry-api-live.azurewebsites.net/collection_request"
     collections_endpoint = "https://fishry.azure-mobile.net/tables/collection?$filter=((collectionVisibility eq true) and (storeID eq '{}'))&$top=1000"
-    zumo_id = "480EFD74-078D-4CF2-AC68-270940ED408F"
+    zumo_id = "egepBriQNqIKWucZFzqpQOMwdDmzfs16"
     rotate_user_agent = True
 
     stores = [
