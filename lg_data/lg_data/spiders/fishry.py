@@ -8,14 +8,12 @@ class FishrySpider(CrawlSpider):
     name = "fishry"
     api_endpoint = "https://fishry-api-live.azurewebsites.net/collection_request"
     collections_endpoint = "https://fishry.azure-mobile.net/tables/collection?$filter=((collectionVisibility eq true) and (storeID eq '{}'))&$top=1000"
-    store_id = "480EFD74-078D-4CF2-AC68-270940ED408F"
+    zumo_id = "480EFD74-078D-4CF2-AC68-270940ED408F"
     rotate_user_agent = True
-    # collections = {}
 
     stores = [
         {
             "id": "480EFD74-078D-4CF2-AC68-270940ED408F",
-            "zumo_id": "egepBriQNqIKWucZFzqpQOMwdDmzfs16",
             "name": "sokamal",
             "active": True,
             "ignore": ["frontpage", "duvet-set", "sheet-set", "media-gallery", "summer-18-catalog" ]
@@ -27,7 +25,7 @@ class FishrySpider(CrawlSpider):
             yield Request(
                 self.collections_endpoint.format(store["id"]),
                 headers = {
-                    "X-ZUMO-APPLICATION": store["zumo_id"]
+                    "X-ZUMO-APPLICATION": self.zumo_id
                 },
                 meta={
                     "ignore": store["ignore"]
@@ -36,11 +34,6 @@ class FishrySpider(CrawlSpider):
 
     def parse(self, response):
         json_response = json.loads(response.body_as_unicode())
-
-        # for item in json_response:
-        #     self.collections.update({
-        #         item["id"]: item["collectionName"]
-        #     })
 
         for item in json_response:
             if item["collectionUrl"] not in response.meta["ignore"]:
