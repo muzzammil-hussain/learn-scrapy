@@ -10,6 +10,7 @@ class FishrySpider(CrawlSpider):
     collections_endpoint = "https://fishry.azure-mobile.net/tables/collection?$filter=((collectionVisibility eq true) and (storeID eq '{}'))&$top=1000"
     store_id = "480EFD74-078D-4CF2-AC68-270940ED408F"
     rotate_user_agent = True
+    # collections = {}
 
     stores = [
         {
@@ -35,6 +36,12 @@ class FishrySpider(CrawlSpider):
 
     def parse(self, response):
         json_response = json.loads(response.body_as_unicode())
+
+        # for item in json_response:
+        #     self.collections.update({
+        #         item["id"]: item["collectionName"]
+        #     })
+
         for item in json_response:
             if item["collectionUrl"] not in response.meta["ignore"]:
                 yield FormRequest(
@@ -62,12 +69,16 @@ class FishrySpider(CrawlSpider):
 
             images = []
             raw_images = json.loads(item["productImage"])
-            for image in raw_images:
+            for v in raw_images.values():
                 images.append({
-                    "name": image["Image"],
-                    "featured": image["Featured"]
+                    "name": v["Image"],
+                    "featured": v["Featured"]
                 })
 
+            collections = []
+            raw_collections = json.loads(item["productCollections"])
+            for v in raw_collections.values():
+                collections.append(v["name"])
 
 
             product["id"] = item["id"]
@@ -81,7 +92,7 @@ class FishrySpider(CrawlSpider):
             product["price"] = item["productPrice"]
             product["quantity"] = item["inventoryQuantity"]
             product["description"] = item["productDescription"]
-            product["meta"] = ""
+            product["collections"] = collections
 
             yield product
 

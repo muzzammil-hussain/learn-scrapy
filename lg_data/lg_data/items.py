@@ -20,4 +20,4 @@ class Product(Item):
     price = Field()
     quantity = Field()
     description = Field()
-    meta = Field()
+    collections = Field()
