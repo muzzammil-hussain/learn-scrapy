@@ -9,7 +9,7 @@ from scrapy import Field, Item
 
 
 class Product(Item):
-    id = Field()
+    vendor_product_id = Field()
     created_at = Field()
     updated_at = Field()
     name = Field()

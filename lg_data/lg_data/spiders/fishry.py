@@ -29,7 +29,8 @@ class FishrySpider(CrawlSpider):
                 },
                 meta={
                     "store_id": store["id"],
-                    "ignore": store["ignore"]
+                    "ignore": store["ignore"],
+                    "name": store["name"]
                 }
             )
 
@@ -74,7 +75,7 @@ class FishrySpider(CrawlSpider):
             for v in raw_collections.values():
                 collections.append(v["name"])
 
-            product["id"] = item["id"]
+            product["vendor_product_id"] = item["id"]
             product["created_at"] = item["__createdAt"]
             product["updated_at"] = item["__updatedAt"]
             product["name"] = item["productName"]
