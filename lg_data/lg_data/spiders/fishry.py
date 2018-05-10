@@ -38,25 +38,24 @@ class FishrySpider(CrawlSpider):
                         if sub_link.get("linkCollection") and sub_link.get("linkCollection") not in ignore_links:
                             current_menu.append(sub_link["linkCollection"])
 
+        yield Request(
+            self.collections_endpoint.format(response.meta["store_id"]),
+            headers = {
+                "X-ZUMO-APPLICATION": self.zumo_id
+            },
+            meta={
+                "store_id": response.meta["store_id"],
+                "current_menu": current_menu
+            },
+            callback=self.parse_collections
+        )
 
-
-
-        return "dsfdsf"
-
-    def start_requests1(self):
-        for store_id in stores.keys():
-            yield Request(
-                self.collections_endpoint.format(store_id),
-                headers = {
-                    "X-ZUMO-APPLICATION": self.zumo_id
-                }
-            )
-
-    def parse1(self, response):
+    def parse_collections(self, response):
         json_response = json.loads(response.body_as_unicode())
+        current_menu = response.meta["current_menu"]
 
         for item in json_response:
-            if item["collectionUrl"] not in response.meta["ignore"]:
+            if item["collectionUrl"] in current_menu:
                 yield FormRequest(
                     self.api_endpoint,
                     formdata={
@@ -72,7 +71,7 @@ class FishrySpider(CrawlSpider):
                         "varients": "[]"
                     },
                     meta={
-                        "store_name": response.meta["store_name"]
+                        "store_name": stores.get(response.meta["store_id"])
                     },
                     callback=self.parse_category,
                     errback=self.parse_errors
