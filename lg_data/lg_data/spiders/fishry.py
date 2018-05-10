@@ -71,7 +71,7 @@ class FishrySpider(CrawlSpider):
                         "varients": "[]"
                     },
                     meta={
-                        "store_name": stores.get(response.meta["store_id"])
+                        "store_name": stores.get(response.meta["store_id"])["name"]
                     },
                     callback=self.parse_category,
                     errback=self.parse_errors
