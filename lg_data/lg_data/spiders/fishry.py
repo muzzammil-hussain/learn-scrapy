@@ -9,24 +9,31 @@ class FishrySpider(CrawlSpider):
     name = "fishry"
     api_endpoint = "https://fishry-api-live.azurewebsites.net/collection_request"
     collections_endpoint = "https://fishry.azure-mobile.net/tables/collection?$filter=((collectionVisibility eq true) and (storeID eq '{}'))&$top=1000"
+    links_endpoint = "https://fishry.azure-mobile.net/tables/link_list?$filter=(storeID eq '{}')&$top=1000"
     zumo_id = "egepBriQNqIKWucZFzqpQOMwdDmzfs16"
     rotate_user_agent = True
 
     def start_requests(self):
         for store_id in stores.keys():
             yield Request(
-                self.collections_endpoint.format(store["id"]),
+                self.links_endpoint.format(store_id),
                 headers = {
                     "X-ZUMO-APPLICATION": self.zumo_id
-                },
-                meta={
-                    "store_id": store["id"],
-                    "ignore": store["ignore"],
-                    "store_name": store["name"]
                 }
             )
 
-    def parse(self, response):
+
+
+    def start_requests1(self):
+        for store_id in stores.keys():
+            yield Request(
+                self.collections_endpoint.format(store_id),
+                headers = {
+                    "X-ZUMO-APPLICATION": self.zumo_id
+                }
+            )
+
+    def parse1(self, response):
         json_response = json.loads(response.body_as_unicode())
 
         for item in json_response:
