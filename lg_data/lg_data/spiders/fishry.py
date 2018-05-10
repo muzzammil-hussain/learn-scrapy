@@ -102,7 +102,7 @@ class FishrySpider(CrawlSpider):
             product["name"] = item["productName"]
             product["images"] = images
             product["sku"] = item["productSKU"]
-            product["url"] = item["productUrl"]
+            product["url"] = "https://sokamal.com/product/{}".format(item["productUrl"])
             product["variants"] = ""
             product["price"] = item["productPrice"]
             product["quantity"] = item["inventoryQuantity"]
