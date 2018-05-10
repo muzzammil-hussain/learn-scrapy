@@ -19,10 +19,29 @@ class FishrySpider(CrawlSpider):
                 self.links_endpoint.format(store_id),
                 headers = {
                     "X-ZUMO-APPLICATION": self.zumo_id
+                },
+                meta={
+                    "store_id": store_id
                 }
             )
 
+    def parse(self, response):
+        json_response = json.loads(response.body_as_unicode())
+        ignore_links = stores.get(response.meta["store_id"])
 
+        current_menu = []
+        for item in json_response:
+            if item["link_handle"] == "main-menu":
+                links = json.loads(item["link_list"])
+                for link in links:
+                    for sub_link in link["list"]:
+                        if sub_link.get("linkCollection") and sub_link.get("linkCollection") not in ignore_links:
+                            current_menu.append(sub_link["linkCollection"])
+
+
+
+
+        return "dsfdsf"
 
     def start_requests1(self):
         for store_id in stores.keys():
