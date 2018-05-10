@@ -1,5 +1,6 @@
 import json
 from lg_data.items import Product
+from lg_data.fishry_configs import stores
 from scrapy import FormRequest, Request
 from scrapy.spiders import CrawlSpider
 
@@ -11,17 +12,8 @@ class FishrySpider(CrawlSpider):
     zumo_id = "egepBriQNqIKWucZFzqpQOMwdDmzfs16"
     rotate_user_agent = True
 
-    stores = [
-        {
-            "id": "480EFD74-078D-4CF2-AC68-270940ED408F",
-            "name": "sokamal",
-            "active": True,
-            "ignore": ["frontpage", "duvet-set", "sheet-set", "media-gallery", "summer-18-catalog" ]
-        }
-    ]
-
     def start_requests(self):
-        for store in self.stores:
+        for store_id in stores.keys():
             yield Request(
                 self.collections_endpoint.format(store["id"]),
                 headers = {
