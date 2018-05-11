@@ -1,4 +1,5 @@
 import json
+import datetime
 from lg_data.items import Product
 from lg_data.fishry_configs import stores
 from scrapy import FormRequest, Request
@@ -97,6 +98,7 @@ class FishrySpider(CrawlSpider):
 
             product["store"] = response.meta["store_name"]
             product["vendor_product_id"] = item["id"]
+            product["scraped_at"] = datetime.datetime.utcnow()
             product["created_at"] = item["__createdAt"]
             product["updated_at"] = item["__updatedAt"]
             product["name"] = item["productName"]

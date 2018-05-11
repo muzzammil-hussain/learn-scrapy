@@ -11,6 +11,7 @@ from scrapy import Field, Item
 class Product(Item):
     vendor_product_id = Field()
     store = Field()
+    scraped_at = Field()
     created_at = Field()
     updated_at = Field()
     name = Field()
