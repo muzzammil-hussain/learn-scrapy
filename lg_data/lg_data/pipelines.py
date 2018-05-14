@@ -14,10 +14,10 @@ class MongoPipeline(object):
 
     def __init__(self):
         connection = pymongo.MongoClient(
-            settings['MONGO_URI']
+            settings["MONGO_URI"]
         )
-        db = connection[settings['MONGODB_DB']]
-        self.collection = db[settings['MONGODB_COLLECTION']]
+        db = connection[settings["MONGODB_DB"]]
+        self.collection = db[settings["MONGODB_COLLECTION"]]
 
     def process_item(self, item, spider):
 
