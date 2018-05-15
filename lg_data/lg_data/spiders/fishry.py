@@ -72,6 +72,7 @@ class FishrySpider(CrawlSpider):
                         "varients": "[]"
                     },
                     meta={
+                        "store_id": stores.get(response.meta["store_id"])["id"],
                         "store_name": stores.get(response.meta["store_id"])["name"]
                     },
                     callback=self.parse_category,
@@ -96,7 +97,8 @@ class FishrySpider(CrawlSpider):
             for v in raw_collections.values():
                 collections.append(v["name"])
 
-            product["store"] = response.meta["store_name"]
+            product["store_id"] = response.meta["store_id"]
+            product["store_name"] = response.meta["store_name"]
             product["vendor_product_id"] = item["id"]
             product["scraped_at"] = datetime.datetime.utcnow()
             product["created_at"] = item["__createdAt"]
