@@ -21,8 +21,8 @@ class MongoPipeline(object):
 
     def process_item(self, item, spider):
 
-        self.collection.insert(dict(item))
-        logging.debug("Item added to database")
+        #self.collection.insert(dict(item))
+        #logging.debug("Item added to database")
         return item
 
 class LgDataPipeline(object):
