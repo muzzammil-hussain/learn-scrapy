@@ -87,23 +87,25 @@ class FishrySpider(CrawlSpider):
 
                 images = []
                 raw_images = json.loads(item["productImage"])
-                for v1 in raw_images.values():
+                for raw_image in raw_images.values():
                     images.append({
-                        "name": v1["Image"],
-                        "featured": v1["Featured"]
+                        "name": raw_image["Image"],
+                        "featured": raw_image["Featured"]
                     })
 
                 collections = []
                 raw_collections = json.loads(item["productCollections"])
-                for v2 in raw_collections.values():
-                    collections.append(v2["name"])
+                for raw_collection in raw_collections.values():
+                    collections.append(raw_collection["name"])
 
                 if item["productMultiOptions"]:
                     attribs = {}
                     raw_options = json.loads(item["productMultiOptionsList"])
                     for v3 in raw_options:
-                        if v3["optionSeleted"] == "Fabric":
-                            pass
+                        if v3["custom"] == "Fabric":
+
+                            for o in v3["value"]:
+
 
 
 
