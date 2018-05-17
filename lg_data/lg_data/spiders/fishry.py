@@ -103,32 +103,18 @@ class FishrySpider(CrawlSpider):
                     raw_options = json.loads(item["productMultiOptionsList"])
                     for raw_option in raw_options:
 
-                        if raw_option["custom"] == "Fabric":
+                        if raw_option["custom"]:
                             values = []
                             for raw_value in raw_option["value"]:
                                 values.append(raw_value["value"])
-                            attribs["Fabric"] = values
+                            attribs[raw_option["custom"]] = values
                             continue
 
-                        if raw_option["custom"] == "No. of Pieces":
+                        if raw_option["optionSelected"]:
                             values = []
                             for raw_value in raw_option["value"]:
                                 values.append(raw_value["value"])
-                            attribs["Pieces"] = values
-                            continue
-
-                        if raw_option["optionSelected"] == "Color":
-                            values = []
-                            for raw_value in raw_option["value"]:
-                                values.append(raw_value["value"])
-                            attribs["Color"] = values
-                            continue
-
-                        if raw_option["optionSelected"] == "Size":
-                            values = []
-                            for raw_value in raw_option["value"]:
-                                values.append(raw_value["value"])
-                            attribs["Size"] = values
+                            attribs[raw_option["optionSelected"]] = values
                             continue
 
 
