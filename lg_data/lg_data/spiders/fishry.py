@@ -147,6 +147,7 @@ class FishrySpider(CrawlSpider):
                 product["quantity"] = item["inventoryQuantity"]
                 product["description"] = item["productDescription"]
                 product["collections"] = collections
+                product["attribs"] = attribs
 
                 yield product
 

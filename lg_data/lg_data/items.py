@@ -24,3 +24,4 @@ class Product(Item):
     quantity = Field()
     description = Field()
     collections = Field()
+    attribs = Field()
