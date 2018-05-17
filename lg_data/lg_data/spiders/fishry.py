@@ -82,38 +82,39 @@ class FishrySpider(CrawlSpider):
     def parse_category(self, response):
         json_response = json.loads(response.body_as_unicode())
         for item in json_response:
-            product = Product()
+            if item["total"] >= 1:
+                product = Product()
 
-            images = []
-            raw_images = json.loads(item["productImage"])
-            for v in raw_images.values():
-                images.append({
-                    "name": v["Image"],
-                    "featured": v["Featured"]
-                })
+                images = []
+                raw_images = json.loads(item["productImage"])
+                for v in raw_images.values():
+                    images.append({
+                        "name": v["Image"],
+                        "featured": v["Featured"]
+                    })
 
-            collections = []
-            raw_collections = json.loads(item["productCollections"])
-            for v in raw_collections.values():
-                collections.append(v["name"])
+                collections = []
+                raw_collections = json.loads(item["productCollections"])
+                for v in raw_collections.values():
+                    collections.append(v["name"])
 
-            product["store_id"] = response.meta["store_id"]
-            product["store_name"] = response.meta["store_name"]
-            product["vendor_product_id"] = item["id"]
-            product["scraped_at"] = datetime.datetime.utcnow()
-            product["created_at"] = item["__createdAt"]
-            product["updated_at"] = item["__updatedAt"]
-            product["name"] = item["productName"]
-            product["images"] = images
-            product["sku"] = item["productSKU"]
-            product["url"] = "https://sokamal.com/product/{}".format(item["productUrl"])
-            product["variants"] = ""
-            product["price"] = item["productPrice"]
-            product["quantity"] = item["inventoryQuantity"]
-            product["description"] = item["productDescription"]
-            product["collections"] = collections
+                product["store_id"] = response.meta["store_id"]
+                product["store_name"] = response.meta["store_name"]
+                product["vendor_product_id"] = item["id"]
+                product["scraped_at"] = datetime.datetime.utcnow()
+                product["created_at"] = item["__createdAt"]
+                product["updated_at"] = item["__updatedAt"]
+                product["name"] = item["productName"]
+                product["images"] = images
+                product["sku"] = item["productSKU"]
+                product["url"] = "https://sokamal.com/product/{}".format(item["productUrl"])
+                product["variants"] = ""
+                product["price"] = item["productPrice"]
+                product["quantity"] = item["inventoryQuantity"]
+                product["description"] = item["productDescription"]
+                product["collections"] = collections
 
-            yield product
+                yield product
 
     def parse_errors(self, response):
         pass
