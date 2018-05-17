@@ -15,20 +15,20 @@ class FishrySpider(CrawlSpider):
     rotate_user_agent = True
 
     def start_requests(self):
-        for store_id in stores.keys():
+        for store in stores.keys():
             yield Request(
-                self.links_endpoint.format(store_id),
-                headers = {
+                self.links_endpoint.format(store),
+                headers={
                     "X-ZUMO-APPLICATION": self.zumo_id
                 },
                 meta={
-                    "store_id": store_id
+                    "store_uuid": store
                 }
             )
 
     def parse(self, response):
         json_response = json.loads(response.body_as_unicode())
-        ignore_links = stores.get(response.meta["store_id"])
+        ignore_links = stores.get(response.meta["store_uuid"])
 
         current_menu = []
         for item in json_response:
@@ -40,12 +40,12 @@ class FishrySpider(CrawlSpider):
                             current_menu.append(sub_link["linkCollection"])
 
         yield Request(
-            self.collections_endpoint.format(response.meta["store_id"]),
+            self.collections_endpoint.format(response.meta["store_uuid"]),
             headers = {
                 "X-ZUMO-APPLICATION": self.zumo_id
             },
             meta={
-                "store_id": response.meta["store_id"],
+                "store_uuid": response.meta["store_uuid"],
                 "current_menu": current_menu
             },
             callback=self.parse_collections
@@ -60,7 +60,7 @@ class FishrySpider(CrawlSpider):
                 yield FormRequest(
                     self.api_endpoint,
                     formdata={
-                        "storeID": response.meta["store_id"],
+                        "storeID": response.meta["store_uuid"],
                         "take": "999",
                         "skip": "0",
                         "collection_inclusion": "true",
@@ -72,8 +72,8 @@ class FishrySpider(CrawlSpider):
                         "varients": "[]"
                     },
                     meta={
-                        "store_id": stores.get(response.meta["store_id"])["id"],
-                        "store_name": stores.get(response.meta["store_id"])["name"]
+                        "store_id": stores.get(response.meta["store_uuid"])["id"],
+                        "store_name": stores.get(response.meta["store_uuid"])["name"]
                     },
                     callback=self.parse_category,
                     errback=self.parse_errors
