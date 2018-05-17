@@ -82,7 +82,7 @@ class FishrySpider(CrawlSpider):
     def parse_category(self, response):
         json_response = json.loads(response.body_as_unicode())
         for item in json_response:
-            if item["total"] >= 1:
+            if item["inventoryQuantity"] >= 1:
                 product = Product()
 
                 images = []
@@ -116,7 +116,6 @@ class FishrySpider(CrawlSpider):
                                 values.append(raw_value["value"])
                             attribs[raw_option["optionSelected"]] = values
                             continue
-
 
                 product["store_id"] = response.meta["store_id"]
                 product["store_name"] = response.meta["store_name"]
