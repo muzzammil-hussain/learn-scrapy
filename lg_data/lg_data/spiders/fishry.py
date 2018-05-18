@@ -16,15 +16,16 @@ class FishrySpider(CrawlSpider):
 
     def start_requests(self):
         for store in stores.keys():
-            yield Request(
-                self.links_endpoint.format(store),
-                headers={
-                    "X-ZUMO-APPLICATION": self.zumo_id
-                },
-                meta={
-                    "store_uuid": store
-                }
-            )
+            if stores.get(store)["active"]:
+                yield Request(
+                    self.links_endpoint.format(store),
+                    headers={
+                        "X-ZUMO-APPLICATION": self.zumo_id
+                    },
+                    meta={
+                        "store_uuid": store
+                    }
+                )
 
     def parse(self, response):
         json_response = json.loads(response.body_as_unicode())
