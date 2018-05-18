@@ -99,8 +99,8 @@ class FishrySpider(CrawlSpider):
                 for raw_collection in raw_collections.values():
                     collections.append(raw_collection["name"])
 
+                attribs = {}
                 if item["productMultiOptions"]:
-                    attribs = {}
                     raw_options = json.loads(item["productMultiOptionsList"])
                     for raw_option in raw_options:
 
