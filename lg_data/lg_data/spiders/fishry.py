@@ -73,8 +73,7 @@ class FishrySpider(CrawlSpider):
                         "varients": "[]"
                     },
                     meta={
-                        "store_id": stores.get(response.meta["store_uuid"])["id"],
-                        "store_name": stores.get(response.meta["store_uuid"])["name"]
+                        "store_uuid": response.meta["store_uuid"]
                     },
                     callback=self.parse_category,
                     errback=self.parse_errors
@@ -118,8 +117,8 @@ class FishrySpider(CrawlSpider):
                             attribs[raw_option["optionSelected"]] = values
                             continue
 
-                product["store_id"] = response.meta["store_id"]
-                product["store_name"] = response.meta["store_name"]
+                product["store_id"] = stores.get(response.meta["store_uuid"])["id"]
+                product["store_name"] = stores.get(response.meta["store_uuid"])["name"]
                 product["vendor_product_id"] = item["id"]
                 product["scraped_at"] = datetime.datetime.utcnow()
                 product["created_at"] = item["__createdAt"]
@@ -127,7 +126,7 @@ class FishrySpider(CrawlSpider):
                 product["name"] = item["productName"]
                 product["images"] = images
                 product["sku"] = item["productSKU"]
-                product["url"] = "https://sokamal.com/product/{}".format(item["productUrl"])
+                product["url"] = "/product/{}".format(stores.get(response.meta["store_uuid"])["url"], item["productUrl"])
                 product["variants"] = ""
                 product["price"] = item["productPrice"]
                 product["quantity"] = item["inventoryQuantity"]
