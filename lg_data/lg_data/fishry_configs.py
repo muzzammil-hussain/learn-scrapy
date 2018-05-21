@@ -34,5 +34,19 @@ stores = {
         "url": "https://chinyere.pk",
         "ignore": []
     },
+    "5FE7B6EC-427B-43F0-AF5C-E95B8237531A": {
+        "id": 5,
+        "name": "Saira Rizwan",
+        "active": True,
+        "url": "https://sairarizwan.com",
+        "ignore": []
+    },
+    "19C5A29C-335B-49B8-98FA-70E46C242266": {
+        "id": 6,
+        "name": "Chenone.com",
+        "active": True,
+        "url": "https://chenone.com",
+        "ignore": []
+    },
 
 }
