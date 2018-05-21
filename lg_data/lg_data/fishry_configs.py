@@ -48,5 +48,12 @@ stores = {
         "url": "https://chenone.com",
         "ignore": []
     },
+    "8538D63D-CB4B-4D8C-9D0D-8DF5930F4703": {
+        "id": 7,
+        "name": "Taana Baana",
+        "active": True,
+        "url": "https://taanabaana.pk",
+        "ignore": []
+    },
 
 }
