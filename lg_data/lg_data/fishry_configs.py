@@ -55,5 +55,11 @@ stores = {
         "url": "https://taanabaana.pk",
         "ignore": []
     },
-
+    "9E713197-7647-4B52-BDF1-AB5B2F0C27D2": {
+        "id": 8,
+        "name": "Warda",
+        "active": True,
+        "url": "http://warda.com.pk",
+        "ignore": []
+    },
 }
