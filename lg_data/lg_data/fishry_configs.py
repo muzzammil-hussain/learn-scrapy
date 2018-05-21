@@ -27,5 +27,12 @@ stores = {
         "url": "https://myrangja.com",
         "ignore": []
     },
+    "58C3F640-7B82-4771-BCD2-83391266FB15": {
+        "id": 4,
+        "name": "Chinyere",
+        "active": True,
+        "url": "https://chinyere.pk",
+        "ignore": []
+    },
 
 }
