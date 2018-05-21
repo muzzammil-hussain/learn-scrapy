@@ -2,7 +2,7 @@ stores = {
     "480EFD74-078D-4CF2-AC68-270940ED408F": {
         "id": 1,
         "name": "So Kamal",
-        "active": False,
+        "active": True,
         "url": "https://sokamal.com",
         "ignore": ["frontpage", "duvet-set", "sheet-set", "media-gallery", "summer-18-catalog"]
     },
@@ -19,6 +19,13 @@ stores = {
             "kids-bedding", "duvet-covers", "bedspreads", "comforters", "cushions", "fillings", "curtains", "towels",
             "table-runners", "tea-cozy", "kitchen-accessories"
         ]
-    }
+    },
+    "8F73C053-564B-42B4-8926-109559F195B8F": {
+        "id": 3,
+        "name": "Rang Ja",
+        "active": True,
+        "url": "https://myrangja.com",
+        "ignore": []
+    },
 
 }
