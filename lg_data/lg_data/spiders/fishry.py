@@ -37,8 +37,8 @@ class FishrySpider(CrawlSpider):
                 links = json.loads(item["link_list"])
                 for link in links:
                     for sub_link in link["list"]:
-                        if sub_link.get("linkCollection") and sub_link.get("linkCollection") not in ignore_links:
-                            current_menu.append(sub_link["linkCollection"])
+                        #if sub_link.get("linkCollection") and sub_link.get("linkCollection") not in ignore_links:
+                        current_menu.append(sub_link["linkCollection"])
 
         yield Request(
             self.collections_endpoint.format(response.meta["store_uuid"]),
