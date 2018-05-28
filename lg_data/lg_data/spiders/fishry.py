@@ -127,7 +127,7 @@ class FishrySpider(CrawlSpider):
                 product["name"] = item["productName"]
                 product["images"] = images
                 product["sku"] = item["productSKU"]
-                product["url"] = "/product/{}".format(stores.get(response.meta["store_uuid"])["url"], item["productUrl"])
+                product["url"] = "{}/product/{}".format(stores.get(response.meta["store_uuid"])["url"], item["productUrl"])
                 product["variants"] = ""
                 product["price"] = item["productPrice"]
                 product["quantity"] = item["inventoryQuantity"]
