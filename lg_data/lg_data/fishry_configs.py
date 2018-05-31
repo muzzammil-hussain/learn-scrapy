@@ -62,4 +62,11 @@ stores = {
         "url": "http://warda.com.pk",
         "ignore": []
     },
+    "A027701F-8C0F-4A42-9C68-FAF081D5126F": {
+        "id": 9,
+        "name": "Barae Khanom",
+        "active": True,
+        "url": "http://baraekhanom.com.pk",
+        "ignore": []
+    },
 }
