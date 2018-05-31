@@ -69,4 +69,11 @@ stores = {
         "url": "http://baraekhanom.com.pk",
         "ignore": []
     },
+    "193FFB97-F728-4261-BBB0-97FBCFF5180D": {
+        "id": 10,
+        "name": "Eminence",
+        "active": True,
+        "url": "http://eminencepk.com",
+        "ignore": []
+    },
 }
