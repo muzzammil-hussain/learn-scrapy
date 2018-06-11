@@ -74,7 +74,8 @@ class FishrySpider(CrawlSpider):
                         "varients": "[]"
                     },
                     meta={
-                        "store_uuid": response.meta["store_uuid"]
+                        "store_uuid": response.meta["store_uuid"],
+                        "collection_url": item["collectionUrl"]
                     },
                     callback=self.parse_category,
                     errback=self.parse_errors
@@ -134,6 +135,7 @@ class FishrySpider(CrawlSpider):
                 product["description"] = item["productDescription"]
                 product["collections"] = collections
                 product["attribs"] = attribs
+                product["collection_url"] = response.meta["collection_url"]
 
                 yield product
 

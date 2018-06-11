@@ -25,3 +25,4 @@ class Product(Item):
     description = Field()
     collections = Field()
     attribs = Field()
+    collection_url = Field()
